@@ -4,7 +4,11 @@
   justify-content: center;
   align-items: center;
   padding: 50px;
-  
+  & .Characters__title{
+    width: 100%;
+    color: red;
+    text-align: left;
+  }
   & .Characters__card{
     overflow: hidden;
     border-radius: 10px;
@@ -31,6 +35,7 @@
       left: 0;
       right: 0;
       color: white;
+      cursor: pointer;
       box-sizing: border-box;
       font-weight: 400;
       background-color: rgba(0, 0, 0,0.7);
@@ -38,9 +43,10 @@
       animation-duration: 1s;
       animation-timing-function: ease-out;
       
+
       & p{
         text-decoration: underline;
-        text-decoration-color: red;
+        text-decoration-color: rgb(255, 0, 0);
         text-decoration-thickness: 3px;
         text-underline-offset: 3px;
       }
@@ -62,6 +68,7 @@
 
     &:hover .Characters__card-infoContainer{
       display: block;
+
     }
   }
 
