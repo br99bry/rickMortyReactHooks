@@ -1,0 +1,53 @@
+.Header{
+  height: 100px;
+  border-bottom: 3px solid red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &.bg-light{
+    background-color: rgb(255, 255, 255);
+    color: rgb(230, 19, 19);
+
+    & button{
+      border: 2px solid red;
+      color: rgb(230, 19, 19);
+      background-color: transparent;
+
+      &:hover{
+        background-color: #121f3d;
+        color: white;
+      }
+    }
+  }
+
+  &.bg-dark{
+    background-color: #121f3d;
+    color: rgb(255, 255, 255);
+
+    & button{
+      border: 2px solid rgb(255, 255, 255);
+      color: rgb(255, 255, 255);
+      background-color: transparent;
+
+      &:hover{
+        background-color: rgb(230, 19, 19);
+        color: white;
+      }
+    }
+  }
+
+  & button{
+    height: 40px;
+    outline: none;
+    border-radius: 5px;
+    padding: 0px 20px;
+    font-weight: bold;
+
+    &:hover{
+      transition: all 450ms ease;
+      transform: scale(0.95);
+      cursor: pointer;
+    }
+  }
+}

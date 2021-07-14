@@ -1,0 +1,88 @@
+.Characters{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  
+  & .Characters__card{
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px;
+    cursor: pointer;
+    height: 300px;
+    position: relative;
+    & img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover{
+      transition: all 550ms ease;
+      transform: scale(1.04);
+    }
+
+    & .Characters__card-infoContainer{
+      display: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+      box-sizing: border-box;
+      font-weight: 400;
+      background-color: rgba(0, 0, 0,0.7);
+      animation-name: surgirInfo;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+      
+      & p{
+        text-decoration: underline;
+        text-decoration-color: red;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 3px;
+      }
+    }
+
+    @keyframes surgirInfo {
+      0%{
+        transform: translateY(100%);
+        border-top: 5px solid white;
+      }
+      90%{
+        border-top: 3px solid white;
+      }
+      100%{
+        transform: translateY(0%);
+        border: none;
+      }
+    }
+
+    &:hover .Characters__card-infoContainer{
+      display: block;
+    }
+  }
+
+  &.bg-light{
+    background-color: rgb(255, 255, 255);
+    & .Characters__card{
+      border: 5px solid red;
+    }
+  }
+
+  &.bg-dark{
+    background-color: #24385b;
+    & .Characters__card{
+      border: 5px solid rgb(255, 255, 255);
+    }
+  }
+}
+
+
+@media screen and (max-width: 450px){
+  .Characters .Characters__card{
+    height: 230px;
+  }
+}
