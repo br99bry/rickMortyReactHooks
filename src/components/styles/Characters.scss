@@ -1,9 +1,51 @@
 .Characters{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   padding: 50px;
+  min-height: calc( 100vh - 100px );
+
+  & .Characters__favorites,
+  & .Characters__filtered{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Search{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .SearchWrapper{
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid red;
+      padding: 0px 0px 0px 10px;
+      background-color: rgb(192, 141, 141);
+      & input{
+        background-color: transparent;
+        outline: none;
+        border: none;
+        padding: 0px 10px;
+        height: 30px;
+        width: fit-content;
+        color: #ffffff;
+        font-weight: bold;
+
+        &::placeholder{
+          color: white;
+        }
+      }
+
+      & svg{
+        color: white;
+        font-size: 20px;
+      }
+    }
+  }
+
   & .Characters__title{
     width: 100%;
     color: red;
@@ -86,6 +128,8 @@
     }
   }
 }
+
+
 
 
 @media screen and (max-width: 450px){
