@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext, useReducer, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useContext, useReducer, useMemo, useRef, useCallback } from 'react';
 import ThemeContext from '../context/ThemeContext';
 import './styles/Characters.scss';
-import { RiUserSearchLine } from 'react-icons/ri';
+import { TiUserDelete } from 'react-icons/ti'
+import Search from './Search';
 
 const Characters = () => {
 
@@ -38,10 +39,14 @@ const Characters = () => {
       const { background } = useContext(ThemeContext);
 
       const handleClick = (favorite,e) => {
-        if(e.target.innerText==='Eliminar de favoritos'){
+        if(e.target.parentElement.className!=='Characters__card-infoContainer'){
           dispatch({ type: 'DELETE_FROM_FAVORITE', payload: favorite })
         }else{
-          dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite })
+          if(!favorites.favorites.includes(favorite)){
+            dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite })
+          }else{
+            return null
+          }
         }
       }
 
@@ -49,9 +54,15 @@ const Characters = () => {
       //   setSearch(event.target.value);
       // }
       
-      const handleSearch = () => {
+      // const handleSearch = () => {
+      //   setSearch(searchInput.current.value);
+      // }
+
+      const handleSearch = useCallback( () => {
         setSearch(searchInput.current.value);
-      }
+      },
+        []
+      )
 
       useEffect( () => {
         fetch('https://rickandmortyapi.com/api/character/')
@@ -69,26 +80,21 @@ const Characters = () => {
         }) ,
         [ characters, search ]
       )
-      
       return(
         <section className={`Characters ${background}`}>
 
           <div className="Characters__favorites">
-            { favorites.favorites.lenght>=1 && 
-              <h1 className="Characters__title" >Favoritos Rick and Morty</h1>
+            { favorites.favorites.length>=1 && 
+              <h4 className="Characters__title" >Favoritos Rick and Morty</h4>
             }
             { favorites.favorites.map( favorite => ( 
-            <div key={favorite.id} className="Characters__card">
+            <div key={favorite.id} className="Characters__card-radius">
               <img src={favorite.image} alt={`Imagen de ${favorite.name}`} />
-              <div className="Characters__card-infoContainer">
-                <h3> {favorite.name} </h3>
-                <p> <strong>Status: </strong> {favorite.status} </p>
-                <p> <strong>Gender: </strong> {favorite.gender} </p>
-                <p> <strong>Specie: </strong> {favorite.species} </p>
-                <button className="btn btn-danger"
+              <div className="Characters__card-noFavorite">
+                <button className="delete-fav btn btn-danger"
                 type="button"
                 onClick={ (e) => handleClick(favorite,e) }
-                >Eliminar de favoritos
+                > <TiUserDelete />
                 </button>
               </div>
             </div>
@@ -96,17 +102,10 @@ const Characters = () => {
           </div>
 
           <div className="Characters__filtered">
-            <div className="Search">
-              <div className="SearchWrapper">
-                <RiUserSearchLine />
-                <input 
-                type="text" 
-                placeholder="Filter Characters . . ." 
-                ref={searchInput}  
-                value={search} 
-                onChange={ handleSearch } />
-              </div>
-            </div>
+            <Search 
+            search={search} 
+            searchInput={searchInput} 
+            handleSearch={handleSearch} />
             { filteredUsers.map( character => (
               <div key={character.id} className="Characters__card">
                 <img src={character.image} alt={`Imagen de ${character.name}`} />
