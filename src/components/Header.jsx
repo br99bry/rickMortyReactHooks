@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import ThemeContext from '../context/ThemeContext';
 import './styles/Header.scss';
-
+import logo from '../assets/img/logoRicjAndMorty.png'
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
   const {background , setBackground} = useContext(ThemeContext);
@@ -17,7 +17,9 @@ const Header = () => {
   return (
     <>
     <div className={`Header ${background}`}>
-      <h1 className="Header__title" >ReactHooks</h1>
+      <div className="Header__title" >
+        <img src={logo} alt="logo de rick and morty" />
+      </div>
       <button 
       onClick={ handleClick } 
       type="button" > 
